@@ -1,0 +1,38 @@
+---
+import ThemeToggleButton from "./ThemeToggleButton";
+import * as CONFIG from "../../config";
+import gitlabLogo from "../../assets/gitlab-logo.svg";
+
+type Props = {
+  viewHref: string;
+};
+
+const { viewHref } = Astro.props as Props;
+const showMoreSection = CONFIG.COMMUNITY_INVITE_URL;
+---
+
+{showMoreSection && <h2 class="heading">More</h2>}
+<ul>
+  {
+    viewHref && (
+      <li class={`header-link depth-2`}>
+        <a class="view-on-github" href={viewHref} target="_blank">
+          <img src={gitlabLogo} width="30em" height="30em" />
+          <span>View on GitLab</span>
+        </a>
+      </li>
+    )
+  }
+</ul>
+<div style="margin: 2rem 0; text-align: center;">
+  <ThemeToggleButton client:visible />
+</div>
+
+<style>
+  .view-on-github {
+    text-decoration: none;
+    font: inherit;
+    color: inherit;
+    font-size: 1rem;
+  }
+</style>

@@ -1,0 +1,13 @@
+{
+  "include": ["src/**/*", "src/**/*.astro"],
+  "exclude": ["src/**/__tests__/*, node_modules/*"],
+  "compilerOptions": {
+    "composite": true,
+    "baseUrl": ".",
+    "allowJs": true,
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "allowSyntheticDefaultImports": true
+}
