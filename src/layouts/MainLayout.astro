@@ -8,6 +8,7 @@ import RightSidebar from "../components/RightSidebar/RightSidebar.astro";
 import * as CONFIG from "../config";
 import type { MarkdownHeading } from "astro";
 import Footer from "../components/Footer/Footer.astro";
+import { getNavLinks } from "../util/getNavLinks";
 
 type Props = {
   frontmatter: CONFIG.Frontmatter;
@@ -19,7 +20,8 @@ const { frontmatter, headings } = Astro.props as Props;
 const canonicalURL = new URL(Astro.url.pathname, "https://example.com");
 const currentPage = Astro.url.pathname;
 const currentFile = `src/pages${currentPage.replace(/\/$/, "")}.md`;
-const gitlubUrl = `${CONFIG.GITLAB_URL}/${currentFile}`;
+const gitlabUrl = `${CONFIG.GITLAB_URL}/${currentFile}`;
+const { previous, next } = await getNavLinks(Astro);
 ---
 
 <html
@@ -42,7 +44,7 @@ const gitlubUrl = `${CONFIG.GITLAB_URL}/${currentFile}`;
     body {
       width: 100%;
       display: grid;
-      grid-template-rows: var(--theme-navbar-height) 1fr;
+      grid-template-rows: var(--theme-navbar-height) 1f autor;
       --gutter: 0.5rem;
       --doc-padding: 2rem;
     }
@@ -134,16 +136,12 @@ const gitlubUrl = `${CONFIG.GITLAB_URL}/${currentFile}`;
         <LeftSidebar currentPage={currentPage} />
       </aside>
       <div id="grid-main">
-        <PageContent
-          frontmatter={frontmatter}
-          headings={headings}
-          gitlubUrl={gitlubUrl}
-        >
+        <PageContent {...{frontmatter, headings, gitlabUrl, previous, next}}>
           <slot />
         </PageContent>
       </div>
       <aside id="grid-right" class="grid-sidebar" title="Table of Contents">
-        <RightSidebar headings={headings} gitlubUrl={gitlubUrl} />
+        <RightSidebar headings={headings} gitlabUrl={gitlabUrl} />
       </aside>
     </main>
     <Footer path={currentFile} />

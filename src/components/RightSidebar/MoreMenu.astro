@@ -8,10 +8,9 @@ type Props = {
 };
 
 const { viewHref } = Astro.props as Props;
-const showMoreSection = CONFIG.COMMUNITY_INVITE_URL;
 ---
 
-{showMoreSection && <h2 class="heading">More</h2>}
+<h2 class="heading">More</h2>
 <ul>
   {
     viewHref && (

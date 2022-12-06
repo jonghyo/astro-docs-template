@@ -1,16 +1,20 @@
 ---
 import type { Frontmatter } from "../../config";
 import MoreMenu from "../RightSidebar/MoreMenu.astro";
+import ArticleNavigationButton from "./ArticleNavigationButton.astro";
 import TableOfContents from "../RightSidebar/TableOfContents";
 import type { MarkdownHeading } from "astro";
 
 type Props = {
   frontmatter: Frontmatter;
   headings: MarkdownHeading[];
-  gitlubUrl: string;
+  gitlabUrl: string;
+  previous?: { text: string; link: string };
+  next?: { text: string; link: string };
 };
 
-const { frontmatter, headings, gitlubUrl } = Astro.props as Props;
+const { frontmatter, headings, gitlabUrl, previous, next } =
+  Astro.props as Props;
 const title = frontmatter.title;
 ---
 
@@ -23,8 +27,16 @@ const title = frontmatter.title;
     <slot />
   </section>
   <nav class="block sm:hidden">
-    <MoreMenu viewHref={gitlubUrl} />
+    <MoreMenu viewHref={gitlabUrl} />
   </nav>
+  {
+    (previous || next) && (
+      <aside class="next-previous-nav">
+        {previous && <ArticleNavigationButton rel="prev" item={previous} />}
+        {next && <ArticleNavigationButton rel="next" item={next} />}
+      </aside>
+    )
+  }
 </article>
 
 <style>
@@ -49,5 +61,13 @@ const title = frontmatter.title;
     .sm\:hidden {
       display: none;
     }
+  }
+
+  .next-previous-nav {
+    display: flex;
+    flex-wrap: wrap;
+    width: auto;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
   }
 </style>
