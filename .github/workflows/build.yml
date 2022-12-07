@@ -6,6 +6,11 @@ name: Build
 on:
   push:
 
+# 同一ブランチに連続pushした際に、ワークフローは1つまでしか実行されないようにする
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   Build:
     runs-on: ubuntu-22.04
