@@ -4,14 +4,15 @@
 name: Build
 
 on:
-  push: 
+  push:
 
 jobs:
-  Setup:
+  Build:
     runs-on: ubuntu-22.04
     permissions:
       contents: read
     timeout-minutes: 10
+
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3.1.0
@@ -20,20 +21,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18
-  
-  Resolve-dependencies:
-    runs-on: ubuntu-22.04
-    needs: Setup
-    permissions:
-        contents: read
-    timeout-minutes: 10
-    steps:
-      - name: Resolve Dependencies
-        working-directory: ~/
-        run: |
-          ls -ahl
-          npm ci
-        
+      
       - name: Cache node_modules
         uses: actions/cache@v3
         id: node_modules_cache_id
@@ -42,36 +30,15 @@ jobs:
         with:
           path: '**/node_modules'
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-          
-  Lint:
-    runs-on: ubuntu-22.04
-    needs: Resolve-dependencies
-    permissions:
-        contents: read
-    timeout-minutes: 10
-    steps:
+      
+      - name: Resolve Dependencies
+        run: npm ci
+      
       - name: Lint
-        working-directory: ~/
         run: npm run lint
         
-  Typecheck:
-    runs-on: ubuntu-22.04
-    needs: Resolve-dependencies
-    permissions:
-        contents: read
-    timeout-minutes: 10
-    steps:
       - name: TypeCheck
-        working-directory: ~/
         run: npm run typecheck
-  
-  build:
-    runs-on: ubuntu-22.04
-    needs: [Lint, Typecheck]
-    permissions:
-        contents: read
-    timeout-minutes: 10
-    steps:
+      
       - name: Build Check
-        working-directory: ~/
         run: npm run build
