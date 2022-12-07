@@ -29,7 +29,9 @@ jobs:
     timeout-minutes: 10
     steps:
       - name: Resolve Dependencies
-        run: npm ci
+        run: |
+          ls -ahl
+          npm ci
         
       - name: Cache node_modules
         uses: actions/cache@v3
