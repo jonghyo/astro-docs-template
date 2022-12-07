@@ -7,7 +7,7 @@ import tailwind from "@astrojs/tailwind";
 // https://astro.build/config
 export default defineConfig({
   site: "http://localhost:3000/",
-  // base: "/mbaas/mbaas-docs",
+  base: "/mbaas/mbaas-docs",
   integrations: [
     // Enable Preact to support Preact JSX components.
     preact(),
