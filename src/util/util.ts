@@ -31,7 +31,7 @@ export type NavDict = ({
   text: string;
   key: NavDictionaryKeys;
   isFallback?: boolean;
-} & ({ slug: string } | { header: true }))[];
+} & ({ slug: string } | { header: boolean }))[];
 
 const nav: NavDict = navList;
 

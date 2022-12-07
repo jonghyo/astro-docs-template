@@ -1,13 +1,20 @@
 {
-  "include": ["src/**/*", "src/**/*.astro"],
-  "exclude": ["src/**/__tests__/*, node_modules/*"],
+  "include": ["src/**/*"],
+  "exclude": ["dist", "node_modules"],
   "compilerOptions": {
     "composite": true,
+    "module": "ES2020",
+    "target": "ES2020",
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
+    "jsx": "react-jsx",
+    "jsxImportSource": "preact",
     "baseUrl": ".",
+    "outDir": "./dist",
     "allowJs": true,
     "paths": {
       "@/*": ["./src/*"]
     }
-  },
-  "allowSyntheticDefaultImports": true
+  }
 }

@@ -10,7 +10,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "tsc --noEmit -p tsconfig.app.json",
     "lint": "eslint --ext .js,.astro 'src/**/*.{js,astro}' --fix --ignore-path .gitignore"
   },
   "dependencies": {

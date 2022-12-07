@@ -32,4 +32,4 @@ export default [
   { text: "バックエンド", header: true, key: "backend" },
   { text: "Auth", slug: "backend/auth", key: "backend/auth" },
   { text: "DataStore", slug: "backend/datastore", key: "backend/datastore" },
-] as const;
+];
