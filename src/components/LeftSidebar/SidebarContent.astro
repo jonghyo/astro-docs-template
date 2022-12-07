@@ -34,7 +34,7 @@ const { sidebarSections, currentPageMatch } = Astro.props as Props;
         {section.children.map(({ slug, text, isFallback }) => (
           <li class="nav-link">
             <a
-              href={`${Astro.url.origin}/${slug}/`}
+              href={`${import.meta.env.BASE_URL}${slug}/`}
               aria-current={`${
                 currentPageMatch.endsWith(slug) ? "page" : "false"
               }`}

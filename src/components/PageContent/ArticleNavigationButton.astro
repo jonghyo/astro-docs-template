@@ -6,7 +6,11 @@ export interface Props {
 const { item, rel } = Astro.props as Props;
 ---
 
-<a class={rel === "next" ? "rtl" : "ltr"} rel={rel} href={item.link}>
+<a
+  class={rel === "next" ? "rtl" : "ltr"}
+  rel={rel}
+  href={`${import.meta.env.BASE_URL.slice(0, -1)}${item.link}`}
+>
   {
     rel === "prev" && (
       <svg
