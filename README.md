@@ -20,6 +20,7 @@ npm create astro@latest -- --template docs
 - ✅ **Automatic table of contents**
 - ✅ **Automatic list of contributors**
 - ✅ (and, best of all) **dark mode**
+- test
 
 ## Commands Cheatsheet
 
